@@ -16,9 +16,6 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
 
-# Salvataggio e visualizzazione
-plt.tight_layout()
-plt.savefig('rhino_reserve_plot.png')
 
 groupby('Reserve')['RhinosAtSighting'].nunique(): Questa è la parte fondamentale. Invece di contare semplicemente quante righe ci sono (che sarebbero gli avvistamenti totali), contiamo quanti ID diversi (nunique) compaiono in ogni riserva. Questo ci dà il numero effettivo di individui.
 

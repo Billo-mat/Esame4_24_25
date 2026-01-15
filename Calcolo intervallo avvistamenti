@@ -1,0 +1,8 @@
+# 1. Raggruppa per rinoceronte e calcola il minimo e il massimo della colonna 'Date'
+stats = df.groupby('RhinosAtSighting')['Date'].agg(['min', 'max']) #estrae per ogni rinoceronte il massimo e il minimo
+
+# 2. Calcola la differenza tra le due date
+# Sottraendo le date otteniamo un Timedelta, da cui estraiamo i giorni e dividiamo per 7
+stats['WeeksBetween'] = (stats['max'] - stats['min']).dt.days / 7  #creazione di una nuova colonna nel df stats
+
+print(stats[['WeeksBetween']])

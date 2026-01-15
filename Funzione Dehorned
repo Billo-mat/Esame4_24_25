@@ -1,0 +1,30 @@
+from typing import List
+
+def dehornings(sightings: List[str]) -> int:
+    """
+    Counts how many times a rhino has undergone the dehorning process based on a 
+    sequence of sightings.
+    
+    >>> dehornings(["Horned", "Horned", "Dehorned"])
+    1
+    >>> dehornings(["Dehorned", "Dehorned", "Dehorned"])
+    1
+    >>> dehornings(["Horned", "Horned", "Horned", "Horned"])
+    0
+    >>> dehornings(["Dehorned", "Horned", "Dehorned"])
+    2
+    """
+    count = 0
+    previous_state = None
+    
+    for status in sightings:
+        # Se lo stato attuale è Dehorned e quello precedente era diverso (o nullo)
+        if status == "Dehorned" and previous_state != "Dehorned":
+            count += 1
+        previous_state = status
+            
+    return count
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

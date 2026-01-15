@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+
+# 1. Calcoliamo il numero di rinoceronti unici per ogni riserva
+# Raggruppiamo per 'Reserve' e contiamo i valori univoci di 'RhinosAtSighting'
+rhino_counts = df.groupby('Reserve')['RhinosAtSighting'].nunique().sort_values(ascending=False)
+
+# 2. Creazione del grafico (Bar Chart / Histogram of frequencies)
+plt.figure(figsize=(10, 6))
+rhino_counts.plot(kind='bar', color='skyblue', edgecolor='black')
+
+# Aggiungiamo titoli e label
+plt.title('Numero di rinoceronti unici osservati per Riserva', fontsize=14)
+plt.xlabel('Riserva', fontsize=12)
+plt.ylabel('Numero di Rinoceronti', fontsize=12)
+plt.xticks(rotation=45) # Ruotiamo i nomi delle riserve per leggerli meglio
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Salvataggio e visualizzazione
+plt.tight_layout()
+plt.savefig('rhino_reserve_plot.png')
+
+groupby('Reserve')['RhinosAtSighting'].nunique(): Questa è la parte fondamentale. Invece di contare semplicemente quante righe ci sono (che sarebbero gli avvistamenti totali), contiamo quanti ID diversi (nunique) compaiono in ogni riserva. Questo ci dà il numero effettivo di individui.
+
+sort_values(ascending=False): Ordiniamo le riserve da quella con più rinoceronti a quella con meno. Questo rende il grafico molto più facile da leggere e interpretare.
+
+kind='bar': Utilizziamo un grafico a barre. In statistica descrittiva, quando si parla di "istogramma delle frequenze" per variabili nominali (come i nomi delle riserve), il grafico a barre è lo standard.
+
+plt.xticks(rotation=45): Poiché i nomi delle riserve possono essere lunghi, ruotarli evita che si sovrappongano.

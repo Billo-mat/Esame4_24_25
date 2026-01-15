@@ -1,0 +1,15 @@
+import pandas as pd
+
+# Read the CSV file
+df = pd.read_csv('rhinos.csv', sep=';')
+
+# Converti le colonne in datetime64[ns]
+# Il parametro dayfirst=True è fondamentale per il formato GG.MM.AAAA
+df['Date'] = pd.to_datetime(df['Date'], dayfirst=True)
+df['DateBorn'] = pd.to_datetime(df['DateBorn'], dayfirst=True)
+
+# Alternatively, you can do this in one step during the read:
+# df = pd.read_csv('rhinos.csv', parse_dates=['Date', 'DateBorn'])
+
+# Verification
+print(df.info())

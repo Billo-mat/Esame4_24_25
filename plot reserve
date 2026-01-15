@@ -1,19 +1,20 @@
-import matplotlib.pyplot as plt
-
 # 1. Calcoliamo il numero di rinoceronti unici per ogni riserva
 # Raggruppiamo per 'Reserve' e contiamo i valori univoci di 'RhinosAtSighting'
-rhino_counts = df.groupby('Reserve')['RhinosAtSighting'].nunique().sort_values(ascending=False)
-
+rhino_counts = df.groupby('Reserve')['RhinosAtSighting'].nunique()
 # 2. Creazione del grafico (Bar Chart / Histogram of frequencies)
 plt.figure(figsize=(10, 6))
 rhino_counts.plot(kind='bar', color='skyblue', edgecolor='black')
 
 # Aggiungiamo titoli e label
 plt.title('Numero di rinoceronti unici osservati per Riserva', fontsize=14)
-plt.xlabel('Riserva', fontsize=12)
+plt.xlabel(None)
 plt.ylabel('Numero di Rinoceronti', fontsize=12)
 plt.xticks(rotation=45) # Ruotiamo i nomi delle riserve per leggerli meglio
 plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Salvataggio e visualizzazione
+plt.tight_layout()
+plt.show()
 
 # Salvataggio e visualizzazione
 plt.tight_layout()

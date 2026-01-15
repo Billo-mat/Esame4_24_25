@@ -1,0 +1,5 @@
+
+df['Age'] = (df['Date'] - df['DateBorn']).dt.days / 7
+
+# Visualizzazione dei primi risultati
+print(df[['Date', 'DateBorn', 'Age']].head())

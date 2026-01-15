@@ -1,0 +1,14 @@
+
+# 1. Assicurati che il DataFrame sia ordinato per data
+# Questo è fondamentale perché la funzione dehornings dipende dall'ordine degli eventi
+df = df.sort_values(by=['RhinosAtSighting', 'Date'])
+
+# 2. Raggruppa per rinoceronte e applica la funzione alla colonna 'Horn'
+# Usiamo groupby e transform o aggregate
+dehorning_counts = df.groupby('RhinosAtSighting')['Horn'].apply(list).apply(dehornings) #dico prima come voglio raggruppare i dati (per rino avvistato), poi scelgo su quale colonna lavorare (Horn), infine la trasformo in una lista e gli applico la funzione definita prima
+
+# 3. Trova il rinoceronte con il maggior numero di dehornazioni
+most_dehorned_rhino = dehorning_counts.idxmax()
+max_value = dehorning_counts.max()
+
+print(f"Il rinoceronte dehornato più volte è {most_dehorned_rhino} con {max_value} operazioni.")

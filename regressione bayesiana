@@ -1,0 +1,22 @@
+# 1. Prepari i dati (per ogni riserva)
+N = df.groupby('Reserve')['RhinosAtSighting'].nunique().values  # Totale rinoceronti
+y = df.groupby('Reserve')['Horn'].apply(lambda x: (x == 'Dehorned').mean()).values # Media dehorned
+
+# 2. Definisci il modello e "correli"
+with pm.Model() as model:
+    alpha = pm.Normal('alpha', 0, 2)
+    beta = pm.Normal('beta', 0, 2)    # <--- Questo misurerà la correlazione
+    sigma = pm.Exponential('sigma', 1)
+    
+    # Formula della correlazione lineare
+    mu = alpha + beta * N
+    
+    # Il computer confronta la sua idea (mu) con i dati veri (y)
+    pm.Normal('obs', mu=mu, sigma=sigma, observed=y)
+    
+    # 3. Campioni
+   trace = pm.sample(2000, tune=1000, return_inferencedata=True)
+
+# 4. VISUALIZZAZIONE DEI RISULTATI (Posterior)
+az.plot_posterior(trace, var_names=['alpha', 'beta', 'sigma'])
+plt.show()
